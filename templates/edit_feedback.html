@@ -1,0 +1,17 @@
+{% extends 'base.html'  %}
+
+{% block content %}
+<form method="POST">
+    {{ form.hidden_tag() }}
+
+    {{form.title.label}}
+    
+    {{form.title (class_="form-control")}}
+    <br/>
+
+    {{form.content.label}}    
+    {{form.content (class_="form-control", rows="3")}}
+    <br/>    
+    <button class="btn btn-success" type="submit">Edit</button>
+  </form>
+{% endblock %}

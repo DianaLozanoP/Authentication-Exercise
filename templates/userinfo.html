@@ -1,0 +1,63 @@
+{% extends 'base.html'  %}
+
+{% block content %}
+<section class="vh-100" style="background-color: #f4f5f7;">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-lg-6 mb-4 mb-lg-0">
+          <div class="card mb-3" style="border-radius: .5rem;">
+            <div class="row g-0">
+              <div class="col-md-4 gradient-custom text-center"
+                style="border-top-left-radius: .5rem; border-bottom-left-radius: .5rem;">
+                <h5>{{user.first_name}} {{user.last_name}}</h5>
+                <p>Username: {{user.username}}</p>
+                <i class="far fa-edit mb-5"></i>
+              </div>
+              <div class="col-md-8">
+                <div class="card-body p-4">
+                  <h6>Information</h6>
+                  <hr class="mt-0 mb-4">
+                  <div class="row pt-1">
+                    <div class="col-6 mb-3">
+                      <h6>Email</h6>
+                      <p class="text-muted">{{user.email}}</p>
+                    </div>
+                  </div>
+                  <h6>Feedback</h6>
+                  <hr class="mt-0 mb-4">
+                  {% for each in user.feedback %}
+                  <div class="card text-center" style="width: 18rem;">
+                    <div class="row">
+                      <div class="mb-3">
+                        <div class="card-body"> 
+                          <h6>{{each.title}}</h6>
+                          <p class="card-text"> {{each.content}}</p>
+                        </div>
+                        <a class="btn btn-outline-warning mb-1" href="/feedback/{{each.id}}/update">Edit</a><br/>
+                        <form method="POST" action="/feedback/{{each.id}}/delete">
+                          <input type="submit" class="btn btn-outline-danger btn-sm mt-2" value="Delete"> 
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %}
+                  <br/>
+                  <h6>More actions</h6>
+                  <hr class="mt-0 mb-">
+                  <div class="row pt-1">
+                    <div class="col-6 mb-1">
+                      <a href="/users/{{user.username}}/feedback/add">Add more feedback</a>
+                      <form method="POST" action="/users/{{user.username}}/delete">
+                        <input type="submit" class="btn btn-outline-danger btn-sm mt-2" value="Delete User"> 
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
